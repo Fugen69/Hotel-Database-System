@@ -10,9 +10,21 @@ load_dotenv()
 # Initialize Supabase client
 @st.cache_resource
 def init_supabase():
-    # Try fetching from Streamlit secrets first (for cloud deployment), then fallback to local os environment variables
-    url = st.secrets.get("SUPABASE_URL") or os.environ.get("SUPABASE_URL")
-    key = st.secrets.get("SUPABASE_KEY") or os.environ.get("SUPABASE_KEY")
+    url = None
+    key = None
+    
+    # Try fetching from Streamlit secrets first (for cloud deployment)
+    try:
+        url = st.secrets.get("SUPABASE_URL")
+        key = st.secrets.get("SUPABASE_KEY")
+    except Exception:
+        pass # Ignore error if secrets.toml doesn't exist locally
+        
+    # Fallback to local os environment variables
+    if not url:
+        url = os.environ.get("SUPABASE_URL")
+    if not key:
+        key = os.environ.get("SUPABASE_KEY")
     
     if not url or not key:
         st.error("Supabase URL or Key is missing. Please check your .env file or Streamlit secrets.")
