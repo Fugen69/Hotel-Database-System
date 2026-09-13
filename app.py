@@ -15,8 +15,8 @@ def init_supabase():
     
     # Try fetching from Streamlit secrets first (for cloud deployment)
     try:
-        url = st.secrets.get("SUPABASE_URL")
-        key = st.secrets.get("SUPABASE_KEY")
+        url = st.secrets.get("https://vgyegbadnvkontyxuiig.supabase.co")
+        key = st.secrets.get("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZneWVnYmFkbnZrb250eXh1aWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzMTQ3OTQsImV4cCI6MjEwNDg5MDc5NH0.lScwYmltT3Kr-wNSwRZro0hWNNbc34GVuWkB_inR6vk")
     except Exception:
         pass # Ignore error if secrets.toml doesn't exist locally
         
